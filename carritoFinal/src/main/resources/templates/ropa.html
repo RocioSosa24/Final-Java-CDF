@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+    <style>
+        body {
+     font-family: 'Arial', sans-serif;
+     margin: 0;
+     padding: 0;
+     background-color: #f0e6f4; /* Violeta pastel */
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+ }
+
+ nav {
+     width: 100%;
+     position: fixed;
+     top: 0;
+     z-index: 1000;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     background-color: #b19cd9; /* Violeta claro */
+     height: 60px;
+     border-radius: 8px;
+     overflow: hidden;
+ }
+
+ a {
+     text-decoration: none;
+     color: #fff;
+     padding: 10px;
+     border-radius: 4px;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
+ }
+
+ a:hover {
+     background-color: #9379af; /* Violeta más oscuro al pasar el ratón */
+ }
+
+ .container {
+    width: 50%;
+     margin-top: 80px;
+     background-color: #fff; /* Blanco */
+     padding: 20px;
+     border-radius: 8px;
+     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ }
+
+ h1 {
+     text-align: center;
+     color: #7f4f91; /* Violeta intenso */
+ }
+
+ .producto {
+     display: flex;
+     justify-content: space-between;
+     border-bottom: 1px solid #ccc;
+     padding: 10px 0;
+     color: #333;
+ }
+
+ .producto:last-child {
+     border-bottom: none;
+ }
+
+ .nombre,
+ .marca,
+ .color,
+ .precio,
+ .talle,
+ .posicion {
+     font-weight: bold;
+     margin-right: 15px;
+ }
+
+ .precio {
+     color: #b35791;
+ }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1><a th:href="@{/electronico}">Electrónicos</a></h1>
+        <h2><a th:href="@{/comestible}">Frutas y verduras</a> </h2>
+    </nav>
+    <div class="container">
+        <h1>Ropa</h1>
+        <div class="producto">
+            <span>N°</span>
+            <span>Nombre</span>
+            <span>Marca</span>
+            <span>Color</span>
+            <span>Talle</span>
+            <span>Precio</span>
+        </div>
+        <div class="producto" th:each="prenda,index : ${prendas}">
+            <span class="posicion" th:text="${index.index}"></span>
+            <span class="nombre" th:text="${prenda.nombre}"></span>
+            <span class="marca" th:text="${prenda.marca}"></span>
+            <span class="color" th:text="${prenda.color}"></span>
+            <span class="talle" th:text="${prenda.talle}"></span>
+            <span class="precio" th:text="${prenda.calcularPrecio()}"></span>
+        </div>
+
+    </div>
+
+</body>
+</html>
